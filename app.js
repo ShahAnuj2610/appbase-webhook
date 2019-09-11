@@ -38,4 +38,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//utils
+global.btoa = function (str) {return new Buffer(str).toString('base64');};
+require('dotenv').config();
+
 module.exports = app;
