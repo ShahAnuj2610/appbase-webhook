@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var mapping = require('../field_mapping');
 
 router.post('/', function(req, res, next) {
     const form_fields = req.body.form_response.definition.fields;
@@ -8,7 +9,7 @@ router.post('/', function(req, res, next) {
     const appbase_record = {};
     form_fields.forEach(function(field, index) {
         const field_to_insert = field.title.replace(/\\/g, '');
-        appbase_record[field_to_insert] = form_answers[index].text;
+        appbase_record[mapping[field_to_insert]] = form_answers[index].text;
     });
     request.post({
         headers: {
